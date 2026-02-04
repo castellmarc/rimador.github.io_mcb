@@ -448,7 +448,7 @@ function actualitzarRimes() {
   document.getElementById("nombre").innerHTML = numerorimes;
 
   var rimesPerSilabes = {};
-  var rima_enllac = "";
+  var rima_enllac = [];
 
   if (matches_provisionals.length > 0) {
     for (var i = 0; i < matches_provisionals.length; i++) {
@@ -485,7 +485,7 @@ function actualitzarRimes() {
     }
 
     for (var silabes in rimesPerSilabes) {
-      rima_enllac += "<h3><br>" + silabes + (silabes > 1 ? " síl·labes" : " síl·laba") + ":</h3><ul>";
+      rima_enllac.push("<h3><br>" + silabes + (silabes > 1 ? " síl·labes" : " síl·laba") + ":</h3><ul>");
       for (var j = 0; j < rimesPerSilabes[silabes].length; j++) {
         var item = rimesPerSilabes[silabes][j];
         var enllacText = "";
@@ -500,9 +500,9 @@ function actualitzarRimes() {
           enllacText += item.enllac_diec + " ";
         }
 
-        rima_enllac += "<li><span class='classeParaula'>" + item.paraula + "</span><span class='classeParaulaMare'>" + item.paraula_mare + "</span> " + enllacText.trim() + "</li>";
+        rima_enllac.push("<li><span class='classeParaula'>" + item.paraula + "</span><span class='classeParaulaMare'>" + item.paraula_mare + "</span> " + enllacText.trim() + "</li>");
       }
-      rima_enllac += "</ul>";
+      rima_enllac.push("</ul>");
     }
     
   } else {
@@ -513,10 +513,10 @@ function actualitzarRimes() {
       rimes = "No s'han trobat rimes amb aquestes condicions. Ets massa exigent!";
     }
     
-    rima_enllac = "<ul><li>" + rimes + "</li></ul>";
+    rima_enllac = ["<ul><li>" + rimes + "</li></ul>"];
   }
 
-  document.getElementById("rima_enllac").innerHTML = rima_enllac;
+  document.getElementById("rima_enllac").innerHTML = rima_enllac.join('');
 
   Debug.logTimeEnd('actualitzarRimes');
 }
